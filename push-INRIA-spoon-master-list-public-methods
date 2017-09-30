@@ -37,6 +37,6 @@ rm -rf $DIR
 } | tee trace.txt
 RET=${PIPESTATUS[0]}
 
-
+# you can add something here
 
 exit $RET
