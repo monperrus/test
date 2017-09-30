@@ -1,47 +1,8 @@
 #!/bin/bash
 
-export GH_USER=spoon-bot
-export TRAVIS_REPO_SLUG=$3/$4
-echo  TRAVIS_REPO_SLUG=$TRAVIS_REPO_SLUG
-# can also be $5 for a push job
-export TRAVIS_BRANCH=master
-
-# copying this file to github
 cd /opt/gakoci/hooks
-THISFILE=$(basename $0)
+HOOKFILE=$(basename $1)
 cd /tmp
-cat $THISFILE
-/home/spirals/mmonperr/push-file-to-github.sh $THISFILE monperrus test
+cat $HOOKFILE
+/home/spirals/mmonperr/push-file-to-github.sh $HOOKFILE monperrus test
 exit 
-
-# bracket used for piping in trace.txt at the end
-{
-DIR=gakoci_job
-mkdir $DIR
-cd $DIR
-git init
-echo git remote -v add origin git://github.com/$TRAVIS_REPO_SLUG.git
-git remote -v add origin git://github.com/$TRAVIS_REPO_SLUG.git
-git fetch origin $TRAVIS_BRANCH:gakoci
-git checkout gakoci
-
-# copying with alternate pom.xml
-cp /home/spirals/mmonperr/list-public-methods_pom.xml pom.xml
-
-# copying main script
-cp /home/spirals/mmonperr/list-public-methods_list-public-methods.groovy chore/list-public-methods.groovy
-
-# must compile the spoon code to access it in the Groovy script
-mvn compile
-
-# running the script
-mvn groovy:execute -Dsource=chore/list-public-methods.groovy -Dscope=runtime
-
-cd ..
-rm -rf $DIR
-} | tee trace.txt
-RET=${PIPESTATUS[0]}
-
-
-
-exit $RET
