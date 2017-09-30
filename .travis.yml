@@ -1,4 +1,4 @@
 script:
-  echo coucou
-  env
-  travis
+  - echo coucou
+  - env
+  - travis
