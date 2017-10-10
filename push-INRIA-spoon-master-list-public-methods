@@ -2,10 +2,8 @@
 
 export GH_USER=spoon-bot
 export TRAVIS_REPO_SLUG=$3/$4
-echo  TRAVIS_REPO_SLUG=$TRAVIS_REPO_SLUG
-# can also be $5 for a push job
 export TRAVIS_BRANCH=master
-echo COMMIT_MSG=$(git log -1 --pretty=%B)
+export COMMIT_MSG=$(git log -1 --pretty=%B)
 
 # copying this file to github
 /opt/gakoci/hooks/save-hook-file-to-github.sh $0
