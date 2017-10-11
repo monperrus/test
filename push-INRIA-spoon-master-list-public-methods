@@ -3,7 +3,6 @@
 export GH_USER=spoon-bot
 export TRAVIS_REPO_SLUG=$3/$4
 export TRAVIS_BRANCH=master
-export COMMIT_MSG=$(git log -1 --pretty=%B)
 
 # copying this file to github
 /opt/gakoci/hooks/save-hook-file-to-github.sh $0
@@ -18,6 +17,8 @@ echo git remote -v add origin git://github.com/$TRAVIS_REPO_SLUG.git
 git remote -v add origin git://github.com/$TRAVIS_REPO_SLUG.git
 git fetch origin $TRAVIS_BRANCH:gakoci
 git checkout gakoci
+
+export COMMIT_MSG=$(git log -1 --pretty=%B)
 
 # copying with alternate pom.xml
 cp /home/spirals/mmonperr/list-public-methods_pom.xml pom.xml
