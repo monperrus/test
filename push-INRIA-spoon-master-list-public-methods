@@ -29,10 +29,10 @@ cp /home/spirals/mmonperr/list-public-methods_list-public-methods.groovy chore/l
 /opt/gakoci/hooks/save-hook-file-to-github.sh chore/list-public-methods.groovy
 
 # must compile the spoon code to access it in the Groovy script
-# mvn compile
+mvn compile
 
 # running the script
-# mvn groovy:execute -Dsource=chore/list-public-methods.groovy -Dscope=runtime
+mvn groovy:execute -Dsource=chore/list-public-methods.groovy -Dscope=runtime
 
 cd ..
 rm -rf $DIR
